@@ -1,0 +1,14 @@
+material Custom/floor
+{
+	receive_shadows off
+	technique
+	{
+		pass
+		{
+			texture_unit
+			{
+				texture 3840x2160-light-sky-blue-solid-color-background.jpg
+			}
+		}
+	}
+}
