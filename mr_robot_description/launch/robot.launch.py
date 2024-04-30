@@ -34,10 +34,10 @@ def generate_launch_description():
 	# spawn robot in gz sim using urdf
 	spawn_robot = Node(package='ros_gz_sim', executable='create',
 				arguments=['-name', 'mr_robot',
-					'-x', '2.0',
-					'-y', '0.0',
-					'-z', '0.0',
-					'-Y', '-1.57',
+					'-x', '-0.191',
+					'-y', '-5.660020',
+					'-z', '0.525252',
+					'-Y', '-0.037287',
 					'-string', robot_urdf],
 				output='screen')
 

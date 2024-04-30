@@ -14,6 +14,7 @@ def generate_launch_description():
 
     pkg_ros_gz_sim = get_package_share_directory('ros_gz_sim')
     pkg_mr_robot_desc = get_package_share_directory('mr_robot_description')
+    pkg_aruco_nav = get_package_share_directory('aruco_navigation_gazebo')
 
     # launch GZ Sim with empty world
     gz_sim = IncludeLaunchDescription(
@@ -21,7 +22,7 @@ def generate_launch_description():
                     os.path.join(pkg_ros_gz_sim, 'launch', 'gz_sim.launch.py')
                 ),
                 launch_arguments={
-                    'gz_args' : pkg_mr_robot_desc + '/worlds/empty.sdf -v 4'
+                    'gz_args' : pkg_aruco_nav + '/worlds/world.sdf -v 4'
                 }.items()          
             )
     

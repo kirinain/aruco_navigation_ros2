@@ -734,14 +734,14 @@
         <visual name='visual'>
           <geometry>
             <mesh>
-              <uri>model://Aruco_1/meshes/aruco_1.dae</uri>
+              <uri>file:///home/ayush/aruco_ws/install/aruco_navigation_gazebo/share/aruco_navigation_gazebo/worlds/model://Aruco_1/meshes/aruco_1.dae</uri>
             </mesh>
           </geometry>
         </visual>
         <collision name='collision_0'>
           <geometry>
             <mesh>
-              <uri>model://Aruco_1/meshes/aruco_1.dae</uri>
+              <uri>file:///home/ayush/aruco_ws/install/aruco_navigation_gazebo/share/aruco_navigation_gazebo/worlds/model://Aruco_1/meshes/aruco_1.dae</uri>
             </mesh>
           </geometry>
         </collision>
@@ -760,7 +760,7 @@
         </inertial>
         <enable_wind>false</enable_wind>
       </link>
-      <pose>4.1582598686218279 -5.8098301887512207 0.48910599946975708 -0.038617717736318578 -0.1698257472307326 0.22474426722681914</pose>
+      <pose>4.1582598686218262 -5.8098301887512207 0.48910599946975702 -0.001971616909151304 0.17410894959124379 3.1302108204316066</pose>
       <static>false</static>
       <self_collide>false</self_collide>
     </model>
@@ -769,14 +769,14 @@
         <visual name='visual'>
           <geometry>
             <mesh>
-              <uri>model://Aruco_2/meshes/aruco_2.dae</uri>
+              <uri>file:///home/ayush/aruco_ws/install/aruco_navigation_gazebo/share/aruco_navigation_gazebo/worlds/model://Aruco_2/meshes/aruco_2.dae</uri>
             </mesh>
           </geometry>
         </visual>
         <collision name='collision_0'>
           <geometry>
             <mesh>
-              <uri>model://Aruco_2/meshes/aruco_2.dae</uri>
+              <uri>file:///home/ayush/aruco_ws/install/aruco_navigation_gazebo/share/aruco_navigation_gazebo/worlds/model://Aruco_2/meshes/aruco_2.dae</uri>
             </mesh>
           </geometry>
         </collision>
@@ -795,7 +795,7 @@
         </inertial>
         <enable_wind>false</enable_wind>
       </link>
-      <pose>-4.7226300239562997 -0.612326979637146 0.5009080171585083 -0.0047299747651759058 -0.0028246098045879957 2.6032570965233082</pose>
+      <pose>-4.7226300239562997 -0.612326979637146 0.5009080171585083 -0.0047299747651759058 -0.0028246098045879983 2.6032570965233077</pose>
       <static>false</static>
       <self_collide>false</self_collide>
     </model>
@@ -804,14 +804,14 @@
         <visual name='visual'>
           <geometry>
             <mesh>
-              <uri>model://Aruco_3/meshes/aruco_3.dae</uri>
+              <uri>file:///home/ayush/aruco_ws/install/aruco_navigation_gazebo/share/aruco_navigation_gazebo/worlds/model://Aruco_3/meshes/aruco_3.dae</uri>
             </mesh>
           </geometry>
         </visual>
         <collision name='collision_0'>
           <geometry>
             <mesh>
-              <uri>model://Aruco_3/meshes/aruco_3.dae</uri>
+              <uri>file:///home/ayush/aruco_ws/install/aruco_navigation_gazebo/share/aruco_navigation_gazebo/worlds/model://Aruco_3/meshes/aruco_3.dae</uri>
             </mesh>
           </geometry>
         </collision>
