@@ -734,14 +734,14 @@
         <visual name='visual'>
           <geometry>
             <mesh>
-              <uri>file:///home/ayush/aruco_ws/install/aruco_navigation_gazebo/share/aruco_navigation_gazebo/worlds/model://Aruco_1/meshes/aruco_1.dae</uri>
+              <uri>model://Aruco_1/meshes/aruco_1.dae</uri>
             </mesh>
           </geometry>
         </visual>
         <collision name='collision_0'>
           <geometry>
             <mesh>
-              <uri>file:///home/ayush/aruco_ws/install/aruco_navigation_gazebo/share/aruco_navigation_gazebo/worlds/model://Aruco_1/meshes/aruco_1.dae</uri>
+              <uri>model://Aruco_1/meshes/aruco_1.dae</uri>
             </mesh>
           </geometry>
         </collision>
@@ -769,14 +769,14 @@
         <visual name='visual'>
           <geometry>
             <mesh>
-              <uri>file:///home/ayush/aruco_ws/install/aruco_navigation_gazebo/share/aruco_navigation_gazebo/worlds/model://Aruco_2/meshes/aruco_2.dae</uri>
+              <uri>model://Aruco_2/meshes/aruco_2.dae</uri>
             </mesh>
           </geometry>
         </visual>
         <collision name='collision_0'>
           <geometry>
             <mesh>
-              <uri>file:///home/ayush/aruco_ws/install/aruco_navigation_gazebo/share/aruco_navigation_gazebo/worlds/model://Aruco_2/meshes/aruco_2.dae</uri>
+              <uri>model://Aruco_2/meshes/aruco_2.dae</uri>
             </mesh>
           </geometry>
         </collision>
@@ -804,14 +804,14 @@
         <visual name='visual'>
           <geometry>
             <mesh>
-              <uri>file:///home/ayush/aruco_ws/install/aruco_navigation_gazebo/share/aruco_navigation_gazebo/worlds/model://Aruco_3/meshes/aruco_3.dae</uri>
+              <uri>model://Aruco_3/meshes/aruco_3.dae</uri>
             </mesh>
           </geometry>
         </visual>
         <collision name='collision_0'>
           <geometry>
             <mesh>
-              <uri>file:///home/ayush/aruco_ws/install/aruco_navigation_gazebo/share/aruco_navigation_gazebo/worlds/model://Aruco_3/meshes/aruco_3.dae</uri>
+              <uri>model://Aruco_3/meshes/aruco_3.dae</uri>
             </mesh>
           </geometry>
         </collision>
