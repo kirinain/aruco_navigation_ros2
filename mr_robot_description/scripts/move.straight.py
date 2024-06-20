@@ -3,63 +3,33 @@
 import rclpy
 from rclpy.node import Node
 from geometry_msgs.msg import Twist
-from turtlesim.msg import Pose
 
-while (True):
-    print ("yo")
+class MoveStraight(Node):
 
-# class MoveNode(Node):
-   
-#    def __init__(self):
-#       super().__init__("turtle_controller")
-#       self.cmd_vel_publisher = self.create_publisher(
-#          Twist, "/bot/cmd_vel", 10)
-#       self.pose_subscriber = self.create_subscription(
-#          Pose, "/bot/pose", self.pose_callback, 10)
-#       self.get_logger().info("Turtle controller has been started.")
-   
-#    def pose_callback(self, pose: Pose):
-#       cmd = Twist()
+    def __init__(self):
+        super().__init__('AYK')
+        self.publisher_ = self.create_publisher(Twist, '/cmd_vel', 10)
+        timer_period = 0.1  # seconds
+        self.timer = self.create_timer(timer_period, self.timer_callback)
+        self.linear_speed = 0.610
 
-#       if pose.x > 9.0:
-#          cmd.linear.x = 0.0
-#          cmd.angular.z = -5.0
-           
-#          if pose.theta < -2.3:
-#             cmd.linear.x = 9.0
-#             cmd.angular.z = 0.0
-   
-#          else:
-#             cmd.linear.x = 0.0
-#             cmd.angular.z = -0.9
-   
-#       else:
-#          cmd.linear.x = 5.0
-#          cmd.angular.z = 0.0
+    def timer_callback(self):
+        msg = Twist()
+        msg.linear.x = self.linear_speed
+        msg.linear.y = 0.0
+        msg.linear.z = 0.0
+        msg.angular.x = 0.0
+        msg.angular.y = 0.0
+        msg.angular.z = 0.0
+        self.publisher_.publish(msg)
+        self.get_logger().info(f"x-axis {self.linear_speed}")
 
-#       if pose.y < 5 and pose.x < 6:
-#          cmd.linear.x = 0.0
-#          cmd.angular.z = 0.5
+def main(args=None):
+    rclpy.init(args=args)
+    move_robot = MoveStraight()
+    rclpy.spin(move_robot)
+    move_robot.destroy_node()
+    rclpy.shutdown()
 
-#          if round(pose.theta,2) == 0.0:
-#             cmd.linear.x = 9.0
-#             cmd.angular.z = 0.0
-
-#       if pose.x > 9.0 and pose.y < 5:
-#          print("HOGYA BANCHO")
-#          cmd.linear.x = 0.0
-#          cmd.angular.z = 0.0
-#          self.cmd_vel_publisher.publish(cmd)
-#          exit(0)
-
-#       self.cmd_vel_publisher.publish(cmd)
-    
-# def main(args=None):
-#    rclpy.init(args=args)
-#    node = MoveNode()
-#    rclpy.spin(node)
-#    MoveNode.destroy_node()
-#    rclpy.shutdown()
-
-# if __name__ == '__main__':
-#     main()
+if __name__ == '__main__':
+    main()
