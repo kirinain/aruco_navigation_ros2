@@ -9,7 +9,6 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
 
-
 def generate_launch_description():
 
     pkg_ros_gz_sim = get_package_share_directory('ros_gz_sim')
@@ -22,7 +21,7 @@ def generate_launch_description():
                     os.path.join(pkg_ros_gz_sim, 'launch', 'gz_sim.launch.py')
                 ),
                 launch_arguments={
-                    'gz_args' : pkg_aruco_nav + '/worlds/world.sdf -v 4'
+                    'gz_args' : pkg_aruco_nav + '/worlds/world.sdf'
                 }.items()          
             )
     
@@ -36,8 +35,16 @@ def generate_launch_description():
                     'with_bridge': 'true'
                 }.items()
             )
-
+    
+    # move straight
+    move = Node(
+        package='mr_robot_description',
+        executable='move.straight.py',
+        output='screen'
+    )
+    
     return LaunchDescription([
         gz_sim,
-        robot
+        robot,
+        move
     ])
