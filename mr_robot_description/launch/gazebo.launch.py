@@ -39,7 +39,7 @@ def generate_launch_description():
     # move straight
     move = Node(
         package='mr_robot_description',
-        executable='move.straight.py',
+        executable='move_straight.py',
         output='screen'
     )
     

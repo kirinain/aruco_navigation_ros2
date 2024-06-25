@@ -29,7 +29,8 @@ install(
 # Install Python scripts
 install(
   PROGRAMS
-    scripts/move.straight.py
+    scripts/move_straight.py
+    scripts/aruco_detection.py
   DESTINATION lib/${PROJECT_NAME}
 )
 
