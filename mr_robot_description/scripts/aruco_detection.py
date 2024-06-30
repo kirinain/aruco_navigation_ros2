@@ -5,26 +5,24 @@ import cv2
 from cv2 import aruco
 import math
 
-# Define the ArUco dictionary
-arucoDict = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_4X4_1000)
-
-# Create ArUco parameters
-arucoParams = cv2.aruco.DetectorParameters()
-
 class Detection:
     def __init__(self):
         self.center = None
         self.markerID1 = None
         self.radius1 = None
         self.T = 0
+        # Define the ArUco dictionary
+        self.arucoDict = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_4X4_1000)
+        # Create ArUco parameters
+        self.arucoParams = cv2.aruco.DetectorParameters()
+
 
     def aruco_detection(self, image):
         self.image = image
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
         image = imutils.resize(image, width=1000)
-        (corners, ids, rejected) = cv2.aruco.detectMarkers(image,
-                                                           arucoDict, parameters=arucoParams)
+        (corners, ids, rejected) = cv2.aruco.detectMarkers(image, self.arucoDict, parameters=self.arucoParams)
         
         print(corners)
 
@@ -61,6 +59,7 @@ class Detection:
 
 if __name__ == "__main__":
     det = Detection()
+    print(det.arucoParams)
     image_path = "/home/ayush/aruco_ws/src/aruco_navigation_ros2/aruco_navigation_gazebo/models/images.png"
     image = cv2.imread(image_path)
     if image is None:
@@ -68,8 +67,6 @@ if __name__ == "__main__":
         exit()
 
     det_result = det.aruco_detection(image)
-    
-
     
     cv2.imshow("AYK", det_result[0])
     cv2.waitKey(0)
