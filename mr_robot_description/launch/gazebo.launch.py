@@ -21,7 +21,7 @@ def generate_launch_description():
                     os.path.join(pkg_ros_gz_sim, 'launch', 'gz_sim.launch.py')
                 ),
                 launch_arguments={
-                    'gz_args' : pkg_aruco_nav + '/worlds/world.sdf'
+                    'gz_args' : pkg_aruco_nav + '/worlds/world.sdf' + " -r"
                 }.items()          
             )
     
@@ -36,15 +36,9 @@ def generate_launch_description():
                 }.items()
             )
     
-    # move straight
-    move = Node(
-        package='mr_robot_description',
-        executable='move.straight.py',
-        output='screen'
-    )
     
     return LaunchDescription([
         gz_sim,
         robot,
-        move
+
     ])

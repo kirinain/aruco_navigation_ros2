@@ -6,12 +6,18 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
 endif()
 
 find_package(ament_cmake REQUIRED)
+find_package(rclpy REQUIRED)
 
-install( DIRECTORY include models worlds env-hooks 
+install( DIRECTORY models worlds env-hooks scripts launch
   DESTINATION share/${PROJECT_NAME}/
   )
 
 ament_environment_hooks("${CMAKE_CURRENT_SOURCE_DIR}/env-hooks/${PROJECT_NAME}.sh.in")
+# Install Python scripts
+install(PROGRAMS
+  scripts/aruco_navigation.py
+  DESTINATION lib/${PROJECT_NAME}
+)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
