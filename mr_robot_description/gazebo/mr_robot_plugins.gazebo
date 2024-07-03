@@ -3,9 +3,11 @@
 
 <xacro:property name="camera_horizontal_fov"       value="60"/>
 
+<gazebo>
 <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
         <render_engine>ogre2</render_engine>
 </plugin>
+</gazebo>
 
 	<!--DiffDrive System Plugin-->
 	<gazebo>
