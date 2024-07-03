@@ -35,16 +35,8 @@ def generate_launch_description():
                     'with_bridge': 'true'
                 }.items()
             )
-    
-    # move straight
-    move = Node(
-        package='mr_robot_description',
-        executable='move_straight.py',
-        output='screen'
-    )
-    
+      
     return LaunchDescription([
         gz_sim,
         robot,
-        move
     ])

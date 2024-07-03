@@ -1,14 +1,20 @@
 <?xml version="1.0" ?>
 <robot name="mr_robot" xmlns:xacro="http://www.ros.org/wiki/xacro" >
 
+<xacro:property name="camera_horizontal_fov"       value="60"/>
+
+<plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
+        <render_engine>ogre2</render_engine>
+</plugin>
+
 	<!--DiffDrive System Plugin-->
 	<gazebo>
 		<plugin filename="gz-sim-diff-drive-system" 
 			name="gz::sim::systems::DiffDrive">
-			<left_joint>Revolute 10</left_joint>
-    		<right_joint>Revolute 9</right_joint>
-    		<wheel_separation>0.293</wheel_separation>
-    		<wheel_radius>0.110</wheel_radius>
+			<left_joint>left_motor_joint</left_joint>
+    		<right_joint>right_motor_joint</right_joint>
+    		<wheel_separation>0.199</wheel_separation>
+    		<wheel_radius>0.0535</wheel_radius>
 			<topic>cmd_vel</topic>
 			<odom_topic>odom</odom_topic>
 			<tf_topic>tf</tf_topic>
@@ -38,7 +44,7 @@
     	      </horizontal>
     	    </scan>
     	    <range>
-    	      <min>0.34</min>
+    	      <min>0.120000</min>
     	      <max>6</max>
     	      <resolution>0.015000</resolution>
     	    </range>
@@ -47,5 +53,50 @@
     	  <visualize>false</visualize>
     	</sensor>
 	</gazebo>
+
+	<!--Kinect Sensor-->
+	<gazebo reference="kinect_camera">
+    <sensor type="depth_camera" name="kinect_camera">
+        <update_rate>30.0</update_rate>
+        <topic>depth_camera</topic>
+        <ignition_frame_id>kinect_camera</ignition_frame_id>
+        <camera_info_topic>camera_info</camera_info_topic>
+        <camera>
+            <horizontal_fov>${radians(camera_horizontal_fov)}</horizontal_fov>
+            <image>
+                <width>640</width>
+                <height>480</height>
+                <format>R8G8B8</format>
+            </image>
+            <clip>
+                <near>0.05</near>
+                <far>8.0</far>
+            </clip>
+        </camera>
+    </sensor>
+</gazebo>
+
+<gazebo reference="camera_link">
+	<sensor name="camera" type="camera">
+        <camera>
+          <horizontal_fov>1.047</horizontal_fov>
+          <image>
+            <width>320</width>
+            <height>240</height>
+          </image>
+          <clip>
+            <near>0.1</near>
+            <far>100</far>
+          </clip>
+        </camera>
+        <always_on>1</always_on>
+        <update_rate>30</update_rate>
+        <visualize>true</visualize>
+        <topic>camera/image_raw</topic>
+    </sensor>
+</gazebo>
+
+
+
 
 </robot>

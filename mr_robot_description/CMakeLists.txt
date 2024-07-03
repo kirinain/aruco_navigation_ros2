@@ -7,8 +7,6 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
-find_package(rclpy REQUIRED)
-find_package(geometry_msgs REQUIRED)
 # uncomment the following section in order to fill in
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
@@ -24,14 +22,6 @@ install(
   worlds
   DESTINATION
   share/${PROJECT_NAME}/
-)
-
-# Install Python scripts
-install(
-  PROGRAMS
-    scripts/move_straight.py
-    scripts/aruco_detection.py
-  DESTINATION lib/${PROJECT_NAME}
 )
 
 if(BUILD_TESTING)
