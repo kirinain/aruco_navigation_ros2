@@ -22,6 +22,7 @@ install(
   meshes
   urdf
   worlds
+  env_hooks
   DESTINATION
   share/${PROJECT_NAME}/
 )

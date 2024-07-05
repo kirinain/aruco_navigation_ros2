@@ -279,6 +279,21 @@
   </collision>
 </link>
 
+<link name="camera_link">
+    <visual>
+        <geometry>
+            <box size="0.010 0.03 0.03"/>
+        </geometry>
+    </visual>
+</link>
+
+<joint name="camera_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="camera_link"/>
+    <origin xyz="0.2 0 0.08" rpy="0 0 0"/>
+</joint>
+
+
 <joint name="Rigid 26" type="fixed">
   <origin xyz="0.1035 0.0 0.08" rpy="0 0 0"/>
   <parent link="base_link"/>
