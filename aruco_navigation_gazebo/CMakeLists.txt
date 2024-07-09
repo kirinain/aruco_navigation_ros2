@@ -16,6 +16,7 @@ ament_environment_hooks("${CMAKE_CURRENT_SOURCE_DIR}/env-hooks/${PROJECT_NAME}.s
 # Install Python scripts
 install(PROGRAMS
   scripts/aruco_navigation.py
+  scripts/aruco_detection.py
   DESTINATION lib/${PROJECT_NAME}
 )
 
