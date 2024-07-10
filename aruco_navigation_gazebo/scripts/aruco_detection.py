@@ -7,12 +7,18 @@ from sensor_msgs.msg import Image
 from cv_bridge import CvBridge, CvBridgeError
 import cv2
 import cv2.aruco as aruco
+from aruco_interfaces.msg import ArucoRadius
+from aruco_interfaces.msg import ArucoPixels
+from aruco_interfaces.msg import ArucoId
 
 class Detection(Node):
     def __init__(self):
         super().__init__('Aruco_detection')
         
         self.subscriber_ = self.create_subscription(Image,'/world_image', self.image_callback, 10) #world_image is the topic name I gave in bridge  file
+        self.publisher_radius = self.create_publisher(ArucoRadius,'aruco_radius',10)
+        self.publisher_id = self.create_publisher(ArucoId,'aruco_id',10)
+        self.publisher_pixels = self.create_publisher(ArucoPixels,'aruco_pixels',10)
         self.get_logger().info("Detection has been initialized.")
         
         self.bridge = CvBridge() #created an object self bridge and CvBridge is the class
@@ -44,12 +50,27 @@ class Detection(Node):
             height = math.sqrt((bottom_left[0] - top_left[0]) ** 2 + (bottom_left[1] - top_left[1]) ** 2)
             radius = int(math.sqrt(width ** 2 + height ** 2) / 2.0)
 
+            aruco_radius_msg = ArucoRadius()
+            aruco_radius_msg.radius = float(radius)
+            self.publisher_radius.publish(aruco_radius_msg)
+
+            aruco_pixels_msg = ArucoPixels()
+            aruco_pixels_msg.centre_x = float(center_x)
+            aruco_pixels_msg.centre_y = float(center_y)
+            self.publisher_pixels.publish(aruco_pixels_msg)
+
+            aruco_id_msg = ArucoId()
+            for i in ids:
+                aruco_id_msg.id = int(i[0])
+                self.publisher_id.publish(aruco_id_msg)
+                print(i)
+
             # sphere around the marker
             cv2.circle(cv_image, (center_x, center_y), radius, (0, 255, 0), 2)
             self.get_logger().info(f"Marker ID: {ids.flatten()[0]}, Center: ({center_x}, {center_y}), Radius: {radius}")
        
         cv2.imshow("kitty",cv_image) #for showing it on window
-        cv2.waitKey(1)
+        cv2.waitKey(1)   
    
         
 def main(args=None):#We don't provide any argument to the script
@@ -57,7 +78,6 @@ def main(args=None):#We don't provide any argument to the script
     node = Detection()
     rclpy.spin(node)
     rclpy.shutdown() 
-    print("c")
     exit()
 
 if __name__ == '__main__':
