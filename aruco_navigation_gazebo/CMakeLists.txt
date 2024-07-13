@@ -31,6 +31,7 @@ install(
   PROGRAMS
     scripts/move_straight.py
     scripts/aruco_detection.py
+    scripts/bot_control.py
   DESTINATION lib/${PROJECT_NAME}
 )
 

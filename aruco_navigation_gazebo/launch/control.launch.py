@@ -20,7 +20,16 @@ def generate_launch_description():
         output='screen'
     )
 
+    # Navigation (controller) node
+    bot_control = Node(
+        package='aruco_navigation_gazebo',
+        executable='bot_control.py',
+        output='screen'
+    )
+
+
     return LaunchDescription([
         aruco_detector,
-        move_straight
+        # move_straight,
+        bot_control
     ])

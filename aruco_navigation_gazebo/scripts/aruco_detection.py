@@ -8,33 +8,36 @@ import cv2
 from cv2 import aruco
 import math
 import imutils
+from custom_message.msg import ArucoVals
 
 class ArucoDetector(Node):
     def __init__(self):
         super().__init__('aruco_detector')
-        # Create a subscription to the /camera/image_raw topic
         self.subscription = self.create_subscription(
             Image,
             '/camera/image_raw',
             self.image_callback,
             10
         )
+        self.publisher_ = self.create_publisher(ArucoVals, 'aruco_data', 10)
         self.bridge = CvBridge()
         self.center = None
         self.markerID1 = None
         self.radius1 = None
         self.T = 0
-        # Define the ArUco dictionary
         self.arucoDict = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_4X4_1000)
-        # Create ArUco parameters
         self.arucoParams = cv2.aruco.DetectorParameters()
 
     def image_callback(self, msg):
-        # Convert ROS 2 Image message to OpenCV image
         image = self.bridge.imgmsg_to_cv2(msg, desired_encoding='bgr8')
-        # Process the image for ArUco marker detection
         det_result = self.aruco_detection(image)
-        # Display the image with detected markers
+        if det_result is not None:
+            aruco_msg = ArucoVals()
+            aruco_msg.x = float(det_result[1][0])
+            aruco_msg.y = float(det_result[1][1])
+            aruco_msg.radius = float(det_result[2]) if det_result[2] is not None else -1.0
+            aruco_msg.id = int(det_result[3]) if det_result[3] is not None else -1
+            self.publisher_.publish(aruco_msg)
         cv2.imshow("Aruco Detection", det_result[0])
         cv2.waitKey(1)
 
