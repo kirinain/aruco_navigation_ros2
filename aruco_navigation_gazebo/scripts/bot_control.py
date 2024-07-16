@@ -19,10 +19,14 @@ class ArucoNavigator(Node):
         self.publisher_ = self.create_publisher(Twist, 'cmd_vel', 10)
         self.current_marker = None
         self.marker_close = False
+        self.detected_markers = []  # Create an empty list to store detected marker IDs
 
     def aruco_callback(self, msg):
         # Update current_marker with the received message
         self.current_marker = msg
+        # Add the marker ID to the detected markers list if not already in it
+        if msg.id not in self.detected_markers:
+            self.detected_markers.append(msg.id)
         # Navigate towards the detected marker
         self.navigate_to_marker()
 
