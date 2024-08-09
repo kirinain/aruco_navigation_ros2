@@ -5,14 +5,14 @@ import numpy as np
 import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import Image
-from cv_bridge import CvBridge, CvBridgeError
+from cv_bridge import CvBridge
 import cv2
 import cv2.aruco as aruco
 from aruco_interfaces.msg import Aruco
 
-class Detection(Node):
+class Aruco_Detection(Node):
     def __init__(self):
-        super().__init__('Aruco_detection')
+        super().__init__('aruco_detection')
         
         self.subscriber_ = self.create_subscription(Image,'/world_image', self.image_callback, 10) #world_image is the topic name I gave in bridge  file
         self.publisher_msg = self.create_publisher(Aruco,'aruco_msg',10)
@@ -22,17 +22,34 @@ class Detection(Node):
         self.aruco_dict = aruco.Dictionary_get(aruco.DICT_4X4_250) 
         self.parameters = aruco.DetectorParameters_create()
 
+        self.declare_parameters(
+            namespace='',
+            parameters=[
+                ('brightness', 15),
+                ('contrast', 2.1),
+                ('start_point',(160, 0)),
+                ('end_point',(160, 300)),
+                ('color',(231, 209, 255)),
+                ('thickness', (2)),
+            ]
+        )
+        self.brightness = self.get_parameter('brightness').value
+        self.contrast = self.get_parameter('contrast').value
+        self.start_point = self.get_parameter('start_point').value
+        self.end_point = self.get_parameter('end_point').value
+        self.color = self.get_parameter('color').value
+        self.thickness = self.get_parameter('thickness').value
+
     def image_callback(self, msg):
+        """This function is responsible for aruco detection and getting variour parameters like radius, centre and ids using custom interfaces."""
         self.image = msg
         cv_image = self.bridge.imgmsg_to_cv2(msg, "bgr8")
         i = 0
 
-        gray = cv2.cvtColor(cv_image, cv2.COLOR_BGR2GRAY) #to convert cv2 image in grayscale for aruco to detect it
-        brightness = 15 
-        contrast = 2.1  
-        gray = cv2.addWeighted(gray, contrast, np.zeros(gray.shape, gray.dtype), 0, brightness)
+        gray = cv2.cvtColor(cv_image, cv2.COLOR_BGR2GRAY) #to convert cv2 image in grayscale for aruco to detect it  
+        gray = cv2.addWeighted(gray, self.contrast, np.zeros(gray.shape, gray.dtype), 0, self.brightness)
         corners, ids, RejectedImgPoints = aruco.detectMarkers(gray, self.aruco_dict, parameters=self.parameters)
-        print(corners)
+        self.get_logger().info(f"Detected Aruco markers with corners: {corners}")
 
 
         if ids is not None:
@@ -63,22 +80,16 @@ class Detection(Node):
             cv2.circle(cv_image, (center_x, center_y), radius, (0, 255, 0), 2)
             self.get_logger().info(f"Marker ID: {ids.flatten()[i]}, Center: ({center_x}, {center_y}), Radius: {radius}")
             i = i+1
-
-        start_point = (160, 0)
-        end_point = (160, 300)
-        color = (231, 209, 255)
-        thickness = 2
-
        
-        cv_image = cv2.line(cv_image, start_point, end_point, color, thickness)
-        cv2.imshow("kitty2",gray)
-        cv2.imshow("kitty",cv_image) #for showing it on window
+        cv_image = cv2.line(cv_image, self.start_point,self.end_point, self.color, self.thickness)
+        cv2.imshow("gray_image_window",gray)
+        cv2.imshow("cv_image_window",cv_image) #for showing it on window
         cv2.waitKey(1)   
    
         
 def main(args=None):#We don't provide any argument to the script
     rclpy.init(args=args)  
-    node = Detection()
+    node = Aruco_Detection()
     rclpy.spin(node)
     rclpy.shutdown() 
     exit()

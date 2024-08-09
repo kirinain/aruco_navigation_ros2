@@ -4,10 +4,9 @@ import math
 import rclpy
 from rclpy.node import Node
 from geometry_msgs.msg import Twist
-from nav_msgs.msg import Odometry
 from aruco_interfaces.msg import Aruco 
 
-class MR_Robot(Node):
+class Aruco_Navigation(Node):
     def __init__(self):
         super().__init__('mr_robot')
 
@@ -23,20 +22,21 @@ class MR_Robot(Node):
         self.flag = False
 
     def aruco_callback(self, msg):
+        """This funtion ensures that robots navigates smoothly using PID and detect every marker turn by turn."""
         aruco_centre_x = msg.centre_x
         aruco_radius = msg.radius
         aruco_id = msg.id
 
         if self.flag == False:
             error = self.Line_centre - aruco_centre_x
-            print (error)
+            self.get_logger().info(f"Error:{error}")
 
             img_radius = self.radius - aruco_radius
-            print (img_radius)
+            self.get_logger().info(f"Image_radius:{img_radius}")
 
         
             self.pub_vel(self.kr*img_radius,self.kp*error)
-            print(self.vel_msg)
+            self.get_logger().info(f"Velocity:{self.vel_msg}")
 
         if aruco_id == 0 and aruco_radius == 62:
             self.pub_vel(0.0,1.5)
@@ -62,10 +62,9 @@ class MR_Robot(Node):
 
 def main(args=None):#We don't provide any argument to the script
     rclpy.init(args=args)  
-    node = MR_Robot()
+    node = Aruco_Navigation()
     rclpy.spin(node)
     rclpy.shutdown() 
-    print("c")
     exit()
 
 if __name__ == '__main__':
