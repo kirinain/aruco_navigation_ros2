@@ -6,10 +6,6 @@ from launch_ros.actions import Node
 
 def generate_launch_description():
 
-    pkg_ros_gz_sim = get_package_share_directory('ros_gz_sim')
-    pkg_mr_robot_desc = get_package_share_directory('mr_robot_description')
-    pkg_aruco_nav = get_package_share_directory('aruco_navigation_gazebo')
-
     #Changes in the navigation of  robot
     mr_robot = Node(package='aruco_navigation_gazebo',
 				executable='aruco_navigation.py',

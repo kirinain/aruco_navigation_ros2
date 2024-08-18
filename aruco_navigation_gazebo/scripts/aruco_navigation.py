@@ -6,6 +6,7 @@ from rclpy.node import Node
 from geometry_msgs.msg import Twist
 from aruco_interfaces.msg import Aruco 
 
+"""This class involves the publishing of twist messages, and subscribing aruco messages for making the robot move and identify each aruco id."""
 class Aruco_Navigation(Node):
     def __init__(self):
         super().__init__('mr_robot')

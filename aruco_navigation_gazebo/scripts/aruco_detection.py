@@ -10,7 +10,9 @@ import cv2
 import cv2.aruco as aruco
 from aruco_interfaces.msg import Aruco
 
-class Aruco_Detection(Node):
+"""This class involves detection of aruco with the help of a CV window, by contrasting and increasing its brigthness
+ and publishing centres, radius and ids of aruco markers."""
+class Aruco_Detection(Node):  
     def __init__(self):
         super().__init__('aruco_detection')
         
@@ -26,7 +28,7 @@ class Aruco_Detection(Node):
             namespace='',
             parameters=[
                 ('brightness', 15),
-                ('contrast', 2.1),
+                ('contrast', 2),
                 ('start_point',(160, 0)),
                 ('end_point',(160, 300)),
                 ('color',(231, 209, 255)),
