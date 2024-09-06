@@ -1,20 +1,16 @@
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>aruco_navigation_gazebo</name>
+  <name>mr_robot_description</name>
   <version>0.0.0</version>
-  <description>This package containes detection and navigation script</description>
+  <description>This package contains robot description.</description>
   <maintainer email="kitinain@gmail.com">kiti</maintainer>
-  <license>Apache-2.0</license>
+  <license>Apache 2.0</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>
-  
-  <depend>rclpy</depend>
-   <depend>aruco_interfaces</depend>
-
 
   <export>
     <build_type>ament_cmake</build_type>

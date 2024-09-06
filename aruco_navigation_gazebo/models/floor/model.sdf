@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<sdf version='1.4'>
+  <model name='floor'>
+    
+    <link name="link">
+      
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>17.0 17.0 0.1</size>
+          </box>
+        </geometry>
+        <material>
+        	<pbr>
+        		<metal>
+        			<albedo_map>model://floor/material/textures/3840x2160-light-sky-blue-solid-color-background.jpg</albedo_map>
+        		</metal>
+        	</pbr>
+        	<diffuse>1 1 1 1</diffuse>
+        	
+        </material>
+      </visual>
+      
+      <collision name ="collision">
+        <geometry>
+           <box>
+            <size>17.0 17.0 0.1</size>
+          </box>
+        </geometry>
+      </collision>
+      
+    </link>
+    <static>1</static>
+    <allow_auto_disable>1</allow_auto_disable>
+  </model>
+</sdf>

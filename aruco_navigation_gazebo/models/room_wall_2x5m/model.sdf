@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<sdf version='1.4'>
+  <model name='room_wall_2x5m'>
+    
+    <link name="link">
+      
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.1 7.0 2.0</size>
+          </box>
+        </geometry>
+        <material>
+        	<pbr>
+        		<metal>
+        			<albedo_map>model://room_wall_2x5m/material/textures/wall_texture_1404x562.jpg</albedo_map>
+        		</metal>
+        	</pbr>
+        	<diffuse>1 1 1 1</diffuse>
+        	
+        </material>
+      </visual>
+      
+      <collision name ="collision">
+        <geometry>
+           <box>
+            <size>0.1 7.0 2.0</size>
+          </box>
+        </geometry>
+      </collision>
+      
+    </link>
+    <static>1</static>
+    <allow_auto_disable>1</allow_auto_disable>
+  </model>
+</sdf>
